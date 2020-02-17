@@ -10,7 +10,7 @@ describe('Articles Endpoints', function() {
     before('make knex instance', () => {
         db = knex({
             client: 'pg',
-            connection: process.env.TEST_DB_URL,
+            connection: process.env.TEST_DATABASE_URL,
         })
         app.set('db', db)
     })
@@ -129,6 +129,7 @@ describe('Articles Endpoints', function() {
             it('GET /api/articles/:article_id responds with 200 and the specified article', () => {
                 const articleId = 2 
                 const expectedArticle = testArticles[articleId - 1]
+                console.log("Expected Article:", expectedArticle)
                 return supertest(app)
                     .get(`/api/articles/${articleId}`)
                     .expect(200, expectedArticle)
